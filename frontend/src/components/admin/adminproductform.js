@@ -1,95 +1,53 @@
-// frontend/src/components/admin/adminproductform.js
+// frontend/src/components/admin/adminlogin.js
 
 import React, { useState } from 'react';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate instead of useHistory
 
-const AdminProductForm = () => {
-    const [productName, setProductName] = useState('');
-    const [productDescription, setProductDescription] = useState('');
-    const [productPrice, setProductPrice] = useState('');
-    const [productImages, setProductImages] = useState([]);
-    const [sizes, setSizes] = useState([]);
-    const [colors, setColors] = useState([]);
-    const [error, setError] = useState('');
+const AdminLoginPage = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate(); // Replace useHistory with useNavigate
 
-    const handleProductSubmit = async (e) => {
-        e.preventDefault();
-        // Form validation
-        if (!productName || !productDescription || !productPrice || productImages.length === 0 || sizes.length === 0 || colors.length === 0) {
-            setError('Please fill out all fields.');
-            return;
-        }
+  const handleLogin = (e) => {
+    e.preventDefault();
+    // Perform authentication logic here (normally you would call an API)
+    if (email === 'yash@ioversized' && password === 'yash@ioversized@2003') {
+      // Redirect to admin dashboard upon successful login
+      navigate('/admin/dashboard'); // Use navigate instead of history.push
+    } else {
+      alert('Invalid credentials. Please try again.');
+      // Clear form fields after unsuccessful login attempt
+      setEmail('');
+      setPassword('');
+    }
+  };
 
-        // Prepare product data to send to backend API
-        const productData = {
-            name: productName,
-            description: productDescription,
-            price: productPrice,
-            images: productImages,
-            sizes: sizes,
-            colors: colors,
-        };
-
-        try {
-            // Example POST request to add product
-            const response = await axios.post('http://localhost:5000/api/products', productData);
-            console.log('Product added:', response.data);
-            // Clear form after successful submission
-            setProductName('');
-            setProductDescription('');
-            setProductPrice('');
-            setProductImages([]);
-            setSizes([]);
-            setColors([]);
-            setError('');
-        } catch (error) {
-            console.error('Error adding product:', error);
-            setError('Failed to add product. Please try again later.');
-        }
-    };
-
-    const handleImageUpload = (e) => {
-        const files = Array.from(e.target.files);
-        const uploadedImages = files.map((file) => URL.createObjectURL(file));
-        setProductImages((prevImages) => [...prevImages, ...uploadedImages]);
-    };
-
-    return (
-        <div className="admin-product-form">
-            <h2>Add New Product</h2>
-            <form onSubmit={handleProductSubmit}>
-                <div>
-                    <label>Product Name:</label>
-                    <input type="text" value={productName} onChange={(e) => setProductName(e.target.value)} />
-                </div>
-                <div>
-                    <label>Description:</label>
-                    <textarea value={productDescription} onChange={(e) => setProductDescription(e.target.value)}></textarea>
-                </div>
-                <div>
-                    <label>Price:</label>
-                    <input type="number" value={productPrice} onChange={(e) => setProductPrice(e.target.value)} />
-                </div>
-                <div>
-                    <label>Images:</label>
-                    <input type="file" accept="image/*" multiple onChange={handleImageUpload} />
-                    {productImages.map((image, index) => (
-                        <img key={index} src={image} alt={`Product ${index + 1}`} className="uploaded-image" />
-                    ))}
-                </div>
-                <div>
-                    <label>Sizes:</label>
-                    <input type="text" value={sizes} onChange={(e) => setSizes(e.target.value.split(','))} />
-                </div>
-                <div>
-                    <label>Colors:</label>
-                    <input type="text" value={colors} onChange={(e) => setColors(e.target.value.split(','))} />
-                </div>
-                <button type="submit">Add Product</button>
-                {error && <p className="error-message">{error}</p>}
-            </form>
+  return (
+    <div className="login-container">
+      <h2>Admin Login</h2>
+      <form onSubmit={handleLogin}>
+        <div className="form-group">
+          <label>Email:</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
         </div>
-    );
+        <div className="form-group">
+          <label>Password:</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  );
 };
 
-export default AdminProductForm;
+export default AdminLoginPage;

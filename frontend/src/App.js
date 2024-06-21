@@ -1,5 +1,3 @@
-// frontend/src/App.js
-
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/layout/header';
@@ -8,14 +6,14 @@ import HomePage from './pages/homepage';
 import ProductPage from './pages/productpage';
 import CartPage from './pages/cartpage';
 import CheckoutPage from './pages/checkoutpage';
-import AdminPage from './pages/adminpage';
+import AdminLoginPage from './pages/adminloginpage'; // Import AdminLoginPage
+import AdminDashboardPage from './pages/admindashboardpage'; // Import AdminDashboardPage
+import AdminPage from './pages/adminpage'; // Import AdminPage
 import LoginPage from './pages/loginpage';
 import RegisterPage from './pages/registerpage';
-import AdminLoginPage from './pages/adminloginpage';
-import AdminDashboardPage from './pages/admindashboardpage';
-import AuthContextProvider from './contexts/authcontext';
+import ProtectedRoute from './components/protectedroute'; // Ensure you have this component
+import { AuthContextProvider } from './contexts/authcontext';
 import CartContextProvider from './contexts/cartcontext';
-import ProtectedRoute from './components/protectedroute';
 import './App.css';
 import './admin.scss';
 
@@ -30,9 +28,11 @@ function App() {
             <Route path="/product/:id" element={<ProductPage />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
-            <Route path="/admin/login" element={<AdminLoginPage />} />
-            <Route path="/admin/dashboard" element={<ProtectedRoute element={<AdminDashboardPage />} />} />
-            <Route path="/admin/*" element={<ProtectedRoute element={<AdminPage />} />} />
+    
+           
+            <Route path="/admin/" element={<AdminLoginPage />} />
+            <Route path="/admin/dashboard"  element={<AdminDashboardPage />} />
+
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
           </Routes>
@@ -42,4 +42,5 @@ function App() {
     </AuthContextProvider>
   );
 }
+
 export default App;

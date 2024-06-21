@@ -1,17 +1,15 @@
-// frontend/src/components/protectedroute.js
-
+// src/components/protectedroute.js
 import React from 'react';
 import { Route, Navigate } from 'react-router-dom';
-import { useAuth } from '../contexts/authcontext';
+import { useAuth } from '../contexts/authcontext'; // Adjust according to your auth context
 
-const ProtectedRoute = ({ element: Component, ...rest }) => {
+const ProtectedRoute = ({ element, ...rest }) => {
   const { currentUser } = useAuth();
+
   return (
     <Route
       {...rest}
-      element={
-        currentUser ? <Component {...rest} /> : <Navigate to="/login" replace />
-      }
+      element={currentUser ? element : <Navigate to="/admin/login" replace />}
     />
   );
 };
