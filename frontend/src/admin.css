@@ -1,0 +1,83 @@
+.admin-dashboard {
+  display: flex;
+}
+.admin-dashboard .sidebar {
+  width: 200px;
+  background-color: #333;
+  color: white;
+  padding: 20px;
+}
+.admin-dashboard .sidebar h2 {
+  margin-top: 0;
+}
+.admin-dashboard .sidebar nav ul {
+  list-style: none;
+  padding: 0;
+}
+.admin-dashboard .sidebar nav ul li {
+  margin-bottom: 10px;
+}
+.admin-dashboard .sidebar nav ul li a {
+  color: white;
+  text-decoration: none;
+}
+.admin-dashboard .sidebar nav ul li a:hover {
+  text-decoration: underline;
+}
+.admin-dashboard .content {
+  flex: 1;
+  padding: 20px;
+}
+.admin-dashboard .content .stats {
+  display: flex;
+  gap: 20px;
+}
+.admin-dashboard .content .stats .stats-card {
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 5px;
+  flex: 1;
+}
+.admin-dashboard .content .stats .stats-card h3 {
+  margin-top: 0;
+}
+
+.admin-login {
+  max-width: 300px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: white;
+}
+.admin-login h2 {
+  text-align: center;
+}
+.admin-login form {
+  display: flex;
+  flex-direction: column;
+}
+.admin-login form div {
+  margin-bottom: 10px;
+}
+.admin-login form div label {
+  display: block;
+  margin-bottom: 5px;
+}
+.admin-login form div input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+.admin-login form button {
+  padding: 10px;
+  border: none;
+  background-color: #333;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.admin-login form button:hover {
+  background-color: #555;
+}/*# sourceMappingURL=admin.css.map */

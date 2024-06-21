@@ -1,0 +1,103 @@
+// frontend/src/admin.scss
+
+.admin-dashboard {
+    display: flex;
+  
+    .sidebar {
+      width: 200px;
+      background-color: #333;
+      color: white;
+      padding: 20px;
+  
+      h2 {
+        margin-top: 0;
+      }
+  
+      nav ul {
+        list-style: none;
+        padding: 0;
+  
+        li {
+          margin-bottom: 10px;
+  
+          a {
+            color: white;
+            text-decoration: none;
+  
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+  
+    .content {
+      flex: 1;
+      padding: 20px;
+  
+      .stats {
+        display: flex;
+        gap: 20px;
+  
+        .stats-card {
+          background-color: #f4f4f4;
+          padding: 20px;
+          border-radius: 5px;
+          flex: 1;
+  
+          h3 {
+            margin-top: 0;
+          }
+        }
+      }
+    }
+  }
+  
+  .admin-login {
+    max-width: 300px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: white;
+  
+    h2 {
+      text-align: center;
+    }
+  
+    form {
+      display: flex;
+      flex-direction: column;
+  
+      div {
+        margin-bottom: 10px;
+  
+        label {
+          display: block;
+          margin-bottom: 5px;
+        }
+  
+        input {
+          width: 100%;
+          padding: 8px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+        }
+      }
+  
+      button {
+        padding: 10px;
+        border: none;
+        background-color: #333;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+  
+        &:hover {
+          background-color: #555;
+        }
+      }
+    }
+  }
+  

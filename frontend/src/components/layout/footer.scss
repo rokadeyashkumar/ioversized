@@ -1,0 +1,19 @@
+/* frontend/src/components/layout/footer.scss */
+
+.footer {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 20px 0;
+    margin-top: 80px;
+    text-align: center;
+  
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+  
+    p {
+      margin: 0;
+    }
+  }
+  

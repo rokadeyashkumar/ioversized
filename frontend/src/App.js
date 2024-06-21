@@ -1,23 +1,28 @@
 // frontend/src/App.js
 
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import HomePage from './pages/HomePage';
-import ProductPage from './pages/ProductPage';
-import CartPage from './pages/CartPage';
-import CheckoutPage from './pages/CheckoutPage';
-import AdminPage from './pages/AdminPage';
-import LoginPage from './pages/LoginPage';
-import './App.css'; // Optional: Import your CSS/SASS here
-import { AuthProvider } from './contexts/AuthContext';
-import { CartProvider } from './contexts/CartContext';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from './components/layout/header';
+import Footer from './components/layout/footer';
+import HomePage from './pages/homepage';
+import ProductPage from './pages/productpage';
+import CartPage from './pages/cartpage';
+import CheckoutPage from './pages/checkoutpage';
+import AdminPage from './pages/adminpage';
+import LoginPage from './pages/loginpage';
+import RegisterPage from './pages/registerpage';
+import AdminLoginPage from './pages/adminloginpage';
+import AdminDashboardPage from './pages/admindashboardpage';
+import AuthContextProvider from './contexts/authcontext';
+import CartContextProvider from './contexts/cartcontext';
+import ProtectedRoute from './components/protectedroute';
+import './App.css';
+import './admin.scss';
 
 function App() {
   return (
-    <AuthProvider>
-      <CartProvider>
+    <AuthContextProvider>
+      <CartContextProvider>
         <Router>
           <Header />
           <Routes>
@@ -25,14 +30,16 @@ function App() {
             <Route path="/product/:id" element={<ProductPage />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
-            <Route path="/admin" element={<AdminPage />} />
+            <Route path="/admin/login" element={<AdminLoginPage />} />
+            <Route path="/admin/dashboard" element={<ProtectedRoute element={<AdminDashboardPage />} />} />
+            <Route path="/admin/*" element={<ProtectedRoute element={<AdminPage />} />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
           </Routes>
           <Footer />
         </Router>
-      </CartProvider>
-    </AuthProvider>
+      </CartContextProvider>
+    </AuthContextProvider>
   );
 }
-
 export default App;
