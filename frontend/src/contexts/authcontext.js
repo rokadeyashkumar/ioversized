@@ -4,26 +4,36 @@ import React, { createContext, useState, useContext } from 'react';
 
 const AuthContext = createContext();
 
-export const useAuth = () => useContext(AuthContext);
-
 const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
 
-  const login = (email, password) => {
-    // Implement login logic
+  const signIn = (user) => {
+    setCurrentUser(user);
   };
 
-  const logout = () => {
-    // Implement logout logic
+  const signOut = () => {
+    setCurrentUser(null);
   };
 
-  const value = {
-    currentUser,
-    login,
-    logout,
-  };
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider
+      value={{
+        currentUser,
+        signIn,
+        signOut,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
-export default AuthContextProvider;
+const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error('useAuth must be used within an AuthContextProvider');
+  }
+  return context;
+};
+
+export { AuthContextProvider, useAuth }; // Named exports

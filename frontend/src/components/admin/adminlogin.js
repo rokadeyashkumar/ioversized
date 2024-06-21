@@ -1,41 +1,50 @@
-// frontend/src/components/admin/adminlogin.js
-
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const AdminLogin = () => {
-    const history = useHistory();
-    const [adminName, setAdminName] = useState('');
-    const [adminPassword, setAdminPassword] = useState('');
-    const [error, setError] = useState('');
+  const navigate = useNavigate();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
-    const handleLogin = () => {
-        // Implement authentication logic here
-        if (adminName === 'yash-ioversized' && adminPassword === 'yash21022003') {
-            // Navigate to Admin Dashboard upon successful login
-            history.push('/admin/dashboard');
-        } else {
-            setError('Invalid credentials. Please try again.');
-        }
-    };
+  const handleLogin = (e) => {
+    e.preventDefault();
+    // Example login logic (replace with actual login check)
+    if (username === 'admin' && password === 'adminpassword') {
+      // Redirect to admin dashboard upon successful login
+      navigate('/admin/dashboard');
+    } else {
+      alert('Invalid credentials. Please try again.');
+    }
+  };
 
-    return (
-        <div className="admin-login">
-            <h2>Admin Login</h2>
-            <form onSubmit={handleLogin}>
-                <div>
-                    <label>Admin Name:</label>
-                    <input type="text" value={adminName} onChange={(e) => setAdminName(e.target.value)} />
-                </div>
-                <div>
-                    <label>Password:</label>
-                    <input type="password" value={adminPassword} onChange={(e) => setAdminPassword(e.target.value)} />
-                </div>
-                <button type="submit">Login</button>
-                {error && <p className="error-message">{error}</p>}
-            </form>
+  return (
+    <div>
+      <h2>Admin Login</h2>
+      <form onSubmit={handleLogin}>
+        <div>
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
         </div>
-    );
+        <div>
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  );
 };
 
 export default AdminLogin;
