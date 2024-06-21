@@ -1,0 +1,38 @@
+/* frontend/src/pages/adminpage.scss */
+.admin-login {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+}
+.admin-login h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+.admin-login .form-group {
+  margin-bottom: 15px;
+}
+.admin-login .form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+.admin-login .form-group input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+.admin-login button {
+  width: 100%;
+  padding: 10px;
+  background-color: #868686;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+.admin-login button:hover {
+  background-color: #000000;
+}/*# sourceMappingURL=adminpage.css.map */
