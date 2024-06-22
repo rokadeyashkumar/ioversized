@@ -10,7 +10,7 @@ import AdminLoginPage from './pages/adminloginpage';
 import AdminDashboardPage from './pages/admindashboardpage';
 import LoginPage from './pages/loginpage';
 import RegisterPage from './pages/registerpage';
-import ProtectedRoute from './components/protectedroute';
+
 import { AuthContextProvider } from './contexts/authcontext';
 import CartContextProvider from './contexts/cartcontext';
 import './pages/admindashboardpage.scss';
@@ -20,6 +20,7 @@ import './admin.scss';
 
 function App() {
   return (
+    
     <AuthContextProvider>
       <CartContextProvider>
         <Router>
@@ -29,8 +30,7 @@ function App() {
             <Route path="/product/:id" element={<ProductPage />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
-    
-           
+        
             <Route path="/admin/" element={<AdminLoginPage />} />
             <Route path="/admin/dashboard/*" element={<AdminDashboardPage />} />
 

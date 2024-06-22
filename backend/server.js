@@ -10,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB Connection
-const uri = 'mongodb+srv://<username>:<password>@<cluster-address>/<database-name>?retryWrites=true&w=majority';
+const uri = 'mongodb+srv://yash:yash0000@ioversized-db.0pwaf4l.mongodb.net/?retryWrites=true&w=majority&appName=ioversized-db';
 mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true
