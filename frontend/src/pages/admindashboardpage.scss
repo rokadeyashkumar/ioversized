@@ -1,0 +1,16 @@
+/* src/pages/admindashboardpage.css */
+
+.admin-dashboard {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .dashboard-content {
+    margin-left: 300px; /* Adjust this width based on sidebar width */
+    padding: 20px;
+    width: calc(100% - 200px); /* Adjust this width based on sidebar width */
+    overflow-y: auto; /* Handle overflow content */
+  }
+  
+  /* Add other styles as needed */
+  
