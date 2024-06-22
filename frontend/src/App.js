@@ -6,16 +6,17 @@ import HomePage from './pages/homepage';
 import ProductPage from './pages/productpage';
 import CartPage from './pages/cartpage';
 import CheckoutPage from './pages/checkoutpage';
-import AdminLoginPage from './pages/adminloginpage'; // Import AdminLoginPage
-import AdminDashboardPage from './pages/admindashboardpage'; // Import AdminDashboardPage
-import AdminPage from './pages/adminpage'; // Import AdminPage
+import AdminLoginPage from './pages/adminloginpage';
+import AdminDashboardPage from './pages/admindashboardpage';
 import LoginPage from './pages/loginpage';
 import RegisterPage from './pages/registerpage';
-import ProtectedRoute from './components/protectedroute'; // Ensure you have this component
+import ProtectedRoute from './components/protectedroute';
 import { AuthContextProvider } from './contexts/authcontext';
 import CartContextProvider from './contexts/cartcontext';
+import './pages/admindashboardpage.scss';
 import './App.css';
 import './admin.scss';
+
 
 function App() {
   return (
@@ -31,7 +32,7 @@ function App() {
     
            
             <Route path="/admin/" element={<AdminLoginPage />} />
-            <Route path="/admin/dashboard"  element={<AdminDashboardPage />} />
+            <Route path="/admin/dashboard/*" element={<AdminDashboardPage />} />
 
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />

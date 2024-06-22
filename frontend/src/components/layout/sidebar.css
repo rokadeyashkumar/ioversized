@@ -1,0 +1,31 @@
+/* src/components/layout/sidebar.css */
+.sidebar {
+  width: 200px;
+  height: 100%;
+  background-color: #000000;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  left: 0;
+  padding-top: 20px;
+  z-index: 100; /* Ensure sidebar is on top */
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  padding: 10px;
+}
+
+.sidebar ul li a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+}
+
+.sidebar ul li a:hover {
+  background-color: #575757;
+}/*# sourceMappingURL=sidebar.css.map */

@@ -1,8 +1,7 @@
-// src/components/layout/sidebar.js
+// src/components/layout/Sidebar.js
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './sidebar.css'; // Create this CSS file for basic styling
 
 const Sidebar = () => {
   return (

@@ -1,51 +1,29 @@
-// frontend/src/components/admin/admindashboard.js
+// src/pages/admindashboard.js
 
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Sidebar from '../components/layout/Sidebar';
+import AddProduct from './addproduct';
+import DeleteProduct from './deleteproduct';
+import ProductList from './productlist';
+import UserDetails from './userdetails';
+import OrderDetails from './orderdetails';
 
 const AdminDashboard = () => {
-    const [users, setUsers] = useState([]);
-
-    useEffect(() => {
-        // Fetch users data from backend API
-        fetchUsers();
-    }, []);
-
-    const fetchUsers = async () => {
-        try {
-            const response = await axios.get('http://localhost:5000/api/users');
-            setUsers(response.data);
-        } catch (error) {
-            console.error('Error fetching users:', error);
-        }
-    };
-
-    const deleteUser = async (userId) => {
-        try {
-            await axios.delete(`http://localhost:5000/api/users/${userId}`);
-            fetchUsers(); // Refresh users list after deletion
-        } catch (error) {
-            console.error('Error deleting user:', error);
-        }
-    };
-
-    return (
-        <div className="admin-dashboard">
-            <h2>Admin Dashboard</h2>
-            <div className="user-management">
-                <h3>User Management</h3>
-                <ul>
-                    {users.map((user) => (
-                        <li key={user.id}>
-                            <span>{user.username}</span>
-                            <span>{user.email}</span>
-                            <button onClick={() => deleteUser(user.id)}>Delete</button>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        </div>
-    );
+  return (
+    <div className="admin-dashboard">
+      <Sidebar />
+      <main>
+        <Routes>
+          <Route path="/admin/dashboard/addproduct" element={<AddProduct />} />
+          <Route path="/admin/dashboard/deleteproduct" element={<DeleteProduct />} />
+          <Route path="/admin/dashboard/productlist" element={<ProductList />} />
+          <Route path="/admin/dashboard/userdetails" element={<UserDetails />} />
+          <Route path="/admin/dashboard/orderdetails" element={<OrderDetails />} />
+        </Routes>
+      </main>
+    </div>
+  );
 };
 
 export default AdminDashboard;
