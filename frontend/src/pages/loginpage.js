@@ -5,7 +5,7 @@ import { Link, Navigate } from 'react-router-dom';
 import { useAuth } from '../contexts/authcontext';
 
 const LoginPage = () => {
-  const { login, currentUser } = useAuth();
+  const { signIn, signOut, currentUser } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -13,16 +13,26 @@ const LoginPage = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await login(email, password);
-      // Redirect to homepage after successful login
-      return <Navigate to="/" />;
+      const user = await signIn(email, password);
+      if (user) {
+        // Redirect or show welcome message after successful login
+      } else {
+        setError('Invalid email or password.');
+      }
     } catch (error) {
       setError('Invalid email or password.');
     }
   };
 
   if (currentUser) {
-    return <Navigate to="/" />;
+    return (
+      <div className="login-page">
+        <h2>Welcome, {currentUser.name}!</h2>
+        <p>Discover our latest collection and shop with ease!</p>
+        <button onClick={signOut}>Logout</button>
+        <Navigate to="/" />
+      </div>
+    );
   }
 
   return (

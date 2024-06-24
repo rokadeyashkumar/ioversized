@@ -1,24 +1,43 @@
-// backend/routes/customer.js
 const express = require('express');
 const router = express.Router();
 const Customer = require('../models/customer.js');
 
-// @route   POST /api/customers/register
-// @desc    Register a new customer
-// @access  Public
+// Route to get all customers
+router.get('/', async (req, res) => {
+  try {
+    const response = await Customer.find();
+    return res.json({ items: response });
+  } catch (error) {
+    console.error(`Error fetching customers: ${error.message}`);
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
+// Route to get a customer by ID
+router.get('/:id', async (req, res) => {
+  try {
+    const customer = await Customer.findById(req.params.id);
+    if (!customer) {
+      return res.status(404).json({ message: 'Customer not found' });
+    }
+    return res.json(customer);
+  } catch (error) {
+    console.error(`Error fetching customer: ${error.message}`);
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
+// Route to register a new customer
 router.post('/register', async (req, res) => {
-  const { name, dob, email, number, password } = req.body;
+  const { name, dob, email, number, password, confirmPassword } = req.body;
+
+  // Basic validation
+  if (!name || !dob || !email || !number || !password || password !== confirmPassword) {
+    return res.status(400).json({ message: 'Invalid data' });
+  }
 
   try {
-    // Check if customer already exists by email (you may adjust this validation as needed)
-    let customer = await Customer.findOne({ email });
-
-    if (customer) {
-      return res.status(400).json({ msg: 'Customer already exists' });
-    }
-
-    // Create new customer instance
-    customer = new Customer({
+    const newCustomer = new Customer({
       name,
       dob,
       email,
@@ -26,13 +45,11 @@ router.post('/register', async (req, res) => {
       password,
     });
 
-    // Save customer to MongoDB
-    await customer.save();
-
-    res.status(201).json({ msg: 'Customer registered successfully' });
+    await newCustomer.save();
+    res.status(201).json({ message: 'User registered successfully' });
   } catch (error) {
-    console.error('Error registering customer:', error);
-    res.status(500).json({ msg: 'Server error' });
+    console.error('Error registering user:', error);
+    res.status(500).json({ message: 'Server error' });
   }
 });
 
