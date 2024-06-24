@@ -1,5 +1,3 @@
-// frontend/src/contexts/authcontext.js
-
 import React, { createContext, useState, useContext } from 'react';
 
 const AuthContext = createContext();
@@ -7,12 +5,31 @@ const AuthContext = createContext();
 const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
 
-  const signIn = (user) => {
-    setCurrentUser(user);
+  const signIn = async (email, password) => {
+    try {
+      const response = await fetch('http://localhost:5000/api/customers/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (response.ok) {
+        const user = await response.json();
+        setCurrentUser(user); // Set the current user after successful login
+        return user;
+      } else {
+        throw new Error('Invalid email or password');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      throw error;
+    }
   };
 
   const signOut = () => {
-    setCurrentUser(null);
+    setCurrentUser(null); // Clear current user on logout
   };
 
   return (
@@ -36,4 +53,4 @@ const useAuth = () => {
   return context;
 };
 
-export { AuthContextProvider, useAuth }; // Named exports
+export { AuthContextProvider, useAuth };

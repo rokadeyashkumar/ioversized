@@ -17,10 +17,8 @@ import './pages/admindashboardpage.scss';
 import './App.css';
 import './admin.scss';
 
-
 function App() {
   return (
-    
     <AuthContextProvider>
       <CartContextProvider>
         <Router>
@@ -30,10 +28,8 @@ function App() {
             <Route path="/product/:id" element={<ProductPage />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
-        
             <Route path="/admin/" element={<AdminLoginPage />} />
             <Route path="/admin/dashboard/*" element={<AdminDashboardPage />} />
-
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
           </Routes>
