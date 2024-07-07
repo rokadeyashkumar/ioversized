@@ -1,10 +1,10 @@
 const express = require('express');
 const connectDB = require('./config/db.js');
 const Customer = require('./models/customer.js');
-const Admin = require('./models/admin.js'); // Import Admin model
+const Admin = require('./models/admin.js');
 const cors = require('cors');
-const bcrypt = require('bcryptjs'); // For password comparison
-const jwt = require('jsonwebtoken'); // For generating tokens
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const app = express();
 app.use(express.json());
@@ -30,7 +30,7 @@ app.get('/', async (req, res) => {
       ...customer._doc,
       dob: formatDate(customer.dob)
     }));
-    const prettyResponse = JSON.stringify({ items: formattedResponse }, null, 2); // Pretty print with 2 spaces
+    const prettyResponse = JSON.stringify({ items: formattedResponse }, null, 2);
     return res.header('Content-Type', 'application/json').send(prettyResponse);
   } catch (error) {
     console.error(`Error fetching customers: ${error.message}`);
@@ -65,12 +65,13 @@ app.post('/api/customers/register', async (req, res) => {
   }
 
   try {
+    const hashedPassword = await bcrypt.hash(password, 10);
     const newCustomer = new Customer({
       name,
       dob,
       email,
       number,
-      password,
+      password: hashedPassword,
     });
 
     await newCustomer.save();
@@ -86,8 +87,13 @@ app.post('/api/customers/login', async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const customer = await Customer.findOne({ email, password });
+    const customer = await Customer.findOne({ email });
     if (!customer) {
+      return res.status(401).json({ message: 'Invalid email or password' });
+    }
+
+    const isMatch = await bcrypt.compare(password, customer.password);
+    if (!isMatch) {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
 
@@ -99,30 +105,29 @@ app.post('/api/customers/login', async (req, res) => {
 });
 
 // Add a secret for JWT
-const JWT_SECRET = 'your_jwt_secret';
+const JWT_SECRET = '484ed,pdcksuc()jixj5c8neifhHxonedi!bcdu[]nibd{}bcuinaelfhnecfheiofncf';
 
 // Route to login an admin
-app.post('/api/admin/login', async (req, res) => {
-  const { username, password } = req.body;
+app.post('/api/admins/login', async (req, res) => {
+  const { adminid, password } = req.body;
 
   try {
-    const admin = await Admin.findOne({ Username: username });
+    const admin = await Admin.findOne({ adminid });
     if (!admin) {
-      return res.status(404).json({ message: 'Admin not found' });
+      return res.status(401).json({ message: 'Admin not found' });
     }
 
-    const isMatch = await bcrypt.compare(password, admin.Password);
+    const isMatch = await bcrypt.compare(password, admin.password);
     if (!isMatch) {
-      return res.status(400).json({ message: 'Invalid credentials' });
+      return res.status(401).json({ message: 'Invalid password' });
     }
 
-    // Generate a token if login is successful
-    const token = jwt.sign({ id: admin._id, role: 'admin' }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ adminid: admin.adminid }, JWT_SECRET, { expiresIn: '1h' });
 
-    res.json({ token, admin: { username: admin.Username } });
+    res.status(200).json({ status: "ok", data: token });
   } catch (error) {
-    console.error('Error during admin login:', error);
-    res.status(500).json({ message: 'Server error', error: error.message });
+    console.error('Error logging in admin:', error);
+    res.status(500).json({ status: "error", error: "Server error" });
   }
 });
 

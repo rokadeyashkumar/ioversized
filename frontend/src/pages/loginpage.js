@@ -1,58 +1,49 @@
 // frontend/src/pages/loginpage.js
 
 import React, { useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
 import { useAuth } from '../contexts/authcontext';
 
 const LoginPage = () => {
-  const { signIn, signOut, currentUser } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const { currentUser, signIn, signOut } = useAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const user = await signIn(email, password);
-      if (user) {
-        // Redirect or show welcome message after successful login
-      } else {
-        setError('Invalid email or password.');
-      }
+      await signIn(email, password);
     } catch (error) {
-      setError('Invalid email or password.');
+      alert('Invalid credentials. Please try again.');
     }
   };
 
-  if (currentUser) {
-    return (
-      <div className="login-page">
-        <h2>Welcome, {currentUser.name}!</h2>
-        <p>Discover our latest collection and shop with ease!</p>
-        <button onClick={signOut}>Logout</button>
-        <Navigate to="/" />
-      </div>
-    );
-  }
+  const handleLogout = () => {
+    signOut();
+  };
 
   return (
     <div className="login-page">
       <h2>Login</h2>
-      <form onSubmit={handleLogin}>
+      {!currentUser ? (
+        <form onSubmit={handleLogin}>
+          <div>
+            <label>Email:</label>
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          </div>
+          <div>
+            <label>Password:</label>
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          </div>
+          <button type="submit">Login</button>
+        </form>
+      ) : (
         <div>
-          <label>Email:</label>
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <p>Welcome, {currentUser.name}!</p>
+          <h3>Experience the Best in Fashion</h3>
+          <p>Discover our latest collection and enjoy a seamless shopping experience with us!</p>
+          <button onClick={handleLogout}>Logout</button>
         </div>
-        <div>
-          <label>Password:</label>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        </div>
-        <button type="submit">Login</button>
-        {error && <p className="error-message">{error}</p>}
-      </form>
-      <p>
-        Don't have an account? <Link to="/register">Register</Link>
-      </p>
+      )}
     </div>
   );
 };

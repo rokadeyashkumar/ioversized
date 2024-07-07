@@ -13,3 +13,34 @@ header a, footer a {
 header a:hover, footer a:hover {
   text-decoration: underline;
 }
+
+/* frontend/src/App.css */
+
+.login-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-page form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.login-page button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.login-page button:hover {
+  background-color: #0056b3;
+}
+
+.login-page p {
+  margin: 1rem 0;
+}

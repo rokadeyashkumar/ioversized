@@ -1,3 +1,4 @@
+// App.js
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/layout/header';
@@ -12,6 +13,7 @@ import LoginPage from './pages/loginpage';
 import RegisterPage from './pages/registerpage';
 
 import { AuthContextProvider } from './contexts/authcontext';
+import { AdminAuthContextProvider } from './contexts/adminauthcontext';
 import CartContextProvider from './contexts/cartcontext';
 import './pages/admindashboardpage.scss';
 import './App.css';
@@ -20,22 +22,24 @@ import './admin.scss';
 function App() {
   return (
     <AuthContextProvider>
-      <CartContextProvider>
-        <Router>
-          <Header />
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/product/:id" element={<ProductPage />} />
-            <Route path="/cart" element={<CartPage />} />
-            <Route path="/checkout" element={<CheckoutPage />} />
-            <Route path="/admin/" element={<AdminLoginPage />} />
-            <Route path="/admin/dashboard/*" element={<AdminDashboardPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-          </Routes>
-          <Footer />
-        </Router>
-      </CartContextProvider>
+      <AdminAuthContextProvider> {/* Wrap AdminAuthContextProvider */}
+        <CartContextProvider>
+          <Router>
+            <Header />
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/product/:id" element={<ProductPage />} />
+              <Route path="/cart" element={<CartPage />} />
+              <Route path="/checkout" element={<CheckoutPage />} />
+              <Route path="/admin/" element={<AdminLoginPage />} />
+              <Route path="/admin/dashboard/*" element={<AdminDashboardPage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegisterPage />} />
+            </Routes>
+            <Footer />
+          </Router>
+        </CartContextProvider>
+      </AdminAuthContextProvider>
     </AuthContextProvider>
   );
 }
