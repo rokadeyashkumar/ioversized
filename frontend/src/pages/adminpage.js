@@ -1,41 +1,49 @@
-// frontend/src/pages/adminpage.js
-
+// frontend/src/pages/adminloginpage.js
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { useAdminAuth } from '../contexts/adminauthcontext';
 
-const AdminPage = () => {
-  const { signIn } = useAdminAuth();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const navigate = useNavigate(); // useNavigate should work here
+const AdminLoginPage = () => {
+    const [adminId, setAdminId] = useState('');
+    const [password, setPassword] = useState('');
+    const { signIn } = useAdminAuth();
+    const navigate = useNavigate();
+    const [error, setError] = useState('');
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      await signIn(username, password);
-      navigate('/admin/dashboard'); // Example navigation after successful login
-    } catch (error) {
-      alert('Login failed. Please try again.');
-    }
-  };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            await signIn(adminId, password);
+            navigate('/admin/dashboard');
+        } catch (error) {
+            setError('wrong data.');
+        }
+    };
 
-  return (
-    <div className="login-page">
-      <h2>Admin Login</h2>
-      <form onSubmit={handleLogin}>
+    return (
         <div>
-          <label>Username:</label>
-          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+            <h2>Admin Login</h2>
+            <form onSubmit={handleSubmit}>
+                <input
+                    type="text"
+                    value={adminId}
+                    onChange={(e) => setAdminId(e.target.value)}
+                    placeholder="Admin ID"
+                    required
+                />
+                <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Password"
+                    required
+                />
+                <button type="submit">Login</button>
+            </form>
+            {error && <p>{error}</p>}
         </div>
-        <div>
-          <label>Password:</label>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        </div>
-        <button type="submit">Login</button>
-      </form>
-    </div>
-  );
+    );
 };
 
-export default AdminPage;
+export default AdminLoginPage;

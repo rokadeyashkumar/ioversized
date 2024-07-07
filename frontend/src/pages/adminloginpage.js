@@ -1,38 +1,49 @@
-// pages/AdminLoginPage.js
+// frontend/src/pages/adminloginpage.js
 import React, { useState } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useAdminAuth } from '../contexts/adminauthcontext';
 
 const AdminLoginPage = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+    const [adminId, setAdminId] = useState('');
+    const [password, setPassword] = useState('');
+    const { signIn } = useAdminAuth();
+    const navigate = useNavigate();
+    const [error, setError] = useState('');
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    if (username === 'yash-ioversized' && password === 'yash21022003') {
-      // Logic for successful login, e.g., set auth context
-      navigate('/admin/dashboard');
-    } else {
-      alert('Invalid credentials. Please try again.');
-    }
-  };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            await signIn(adminId, password);
+            navigate('/admin/dashboard');
+        } catch (error) {
+            setError('wrong data.');
+        }
+    };
 
-  return (
-    <div className="login-page">
-      <h2>Admin Login</h2>
-      <form onSubmit={handleLogin}>
+    return (
         <div>
-          <label>Username:</label>
-          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+            <h2>Admin Login</h2>
+            <form onSubmit={handleSubmit}>
+                <input
+                    type="text"
+                    value={adminId}
+                    onChange={(e) => setAdminId(e.target.value)}
+                    placeholder="Admin ID"
+                    required
+                />
+                <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Password"
+                    required
+                />
+                <button type="submit">Login</button>
+            </form>
+            {error && <p>{error}</p>}
         </div>
-        <div>
-          <label>Password:</label>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        </div>
-        <button type="submit">Login</button>
-      </form>
-    </div>
-  );
+    );
 };
 
 export default AdminLoginPage;
