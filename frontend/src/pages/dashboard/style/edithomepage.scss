@@ -1,0 +1,41 @@
+.edit-homepage {
+    margin-bottom: 20px;
+  
+    h2 {
+      margin-bottom: 10px;
+    }
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+  
+      th,
+      td {
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: left;
+      }
+  
+      th {
+        background-color: #f4f4f4;
+      }
+  
+      img {
+        max-width: 100px;
+      }
+  
+      button {
+        padding: 5px 10px;
+        background-color: #000000;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+  
+        &:hover {
+          background-color: #252525;
+        }
+      }
+    }
+  }
+  
