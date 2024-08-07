@@ -1,0 +1,93 @@
+.home {
+  .carousel-container {
+    width: 100%; /* Use full viewport width */
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    margin-top: -200px; /* Reset to zero margin-top */
+    z-index: 0; /* Ensure it’s not covering other elements */
+
+    .carousel .slide {
+      height: 100%; /* Make sure slides take full height */
+    }
+
+    .carousel .slide img {
+      height: 100%; /* Ensure images fit within the height */
+      width: 100%; /* Ensure images take full width */
+      object-fit: cover; /* Maintain aspect ratio and cover the entire area */
+    }
+  }
+
+  .cards-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+    width: 100%;
+    
+
+    .card {
+      flex: 1;
+      margin: 0 10px;
+      padding: 20px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+
+      h2 {
+        margin-bottom: 10px;
+        font-size: 1.5rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .hero {
+    background-color: #333; /* Placeholder background color */
+    color: white;
+    text-align: center;
+    padding: 80px 20px; /* Adjust padding to reduce height */
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.5rem;
+    }
+  }
+
+  .products {
+    padding: 50px 20px;
+
+    h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 40px;
+    }
+
+    /* Add styles for product listings here */
+  }
+
+  @media (max-width: 768px) {
+    .carousel-container {
+      height: auto; /* Make carousel height responsive */
+      left: 0;
+      right: 0;
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .cards-container {
+      flex-direction: column;
+      .card {
+        margin: 10px 0;
+      }
+    }
+  }
+}
