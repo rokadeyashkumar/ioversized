@@ -1,3 +1,5 @@
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Home from "./pages/home";
 import Login from "./pages/login";
 import Admin from "./pages/admin";
@@ -6,8 +8,7 @@ import Dashboard from "./pages/dashboard";
 import Error from "./pages/error";
 import Otp from "./pages/otp";
 import Headers from "./components/headers";
-import Footer from "./components/footer"
-import { Routes, Route } from "react-router-dom";
+import Footer from "./components/footer";
 import "./App.css";
 
 function App() {
