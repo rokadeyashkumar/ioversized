@@ -1,118 +1,62 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axios from "./service/axios"; // Ensure this path is correct
 import "./style/addproduct.scss";
 
 const AddProduct = () => {
-  const [newProduct, setNewProduct] = useState({
-    name: "",
-    originalPrice: "",
-    salePrice: "",
-    size: [],
-    colors: [],
-    details: "",
-    info: "",
-    type: "Classic Oversized T-Shirts",
-    types: [
-      "Classic Oversized T-Shirts",
-      "Standard Oversized T-Shirts",
-      "Hoodies",
-      "Zippers",
-    ],
-    mainImage: "",
-    additionalImage1: "",
-    additionalImage2: "",
-  });
+  const [name, setName] = useState("");
+  const [details, setDetails] = useState("");
+  const [info, setInfo] = useState("");
+  const [type, setType] = useState("");
+  const [types, setTypes] = useState([
+    'Classic Oversized T-Shirts',
+    'Standard Oversized T-Shirts',
+    'Hoodies',
+    'Zippers',
+  ]);
+  const [size, setSize] = useState([]);
+  const [colors, setColors] = useState(['']);
+  const [originalPrice, setOriginalPrice] = useState("");
+  const [salePrice, setSalePrice] = useState("");
+  const [mainImage, setMainImage] = useState("");
+  const [additionalImage1, setAdditionalImage1] = useState("");
+  const [additionalImage2, setAdditionalImage2] = useState("");
 
-  const handleAddProduct = async () => {
-    if (
-      !newProduct.name ||
-      !newProduct.originalPrice ||
-      !newProduct.salePrice ||
-      !newProduct.mainImage
-    ) {
-      alert("Please fill out all required fields.");
-      return;
-    }
+  const addProduct = (e) => {
+    e.preventDefault();
 
-    try {
-      const response = await axios.post("/api/products/add", newProduct, {
-        headers: {
-          "Content-Type": "application/json",
-        },
+    const productData = {
+      name,
+      details,
+      info,
+      type,
+      size,
+      colors,
+      originalPrice,
+      salePrice,
+      mainImage,
+      additionalImage1,
+      additionalImage2,
+    };
+
+    axios.post("/products/add", productData)
+      .then(() => {
+        // Clear form fields on success
+        setName('');
+        setDetails('');
+        setInfo('');
+        setType('');
+        setSize([]);
+        setColors(['']);
+        setOriginalPrice('');
+        setSalePrice('');
+        setMainImage('');
+        setAdditionalImage1('');
+        setAdditionalImage2('');
+      })
+      .catch((error) => {
+        console.error('Error adding product:', error.response ? error.response.data : error.message);
+        alert('Error adding product. Please check the console for more details.');
       });
-
-      alert("Product added successfully!");
-      setNewProduct({
-        name: "",
-        originalPrice: "",
-        salePrice: "",
-        size: [],
-        colors: [],
-        details: "",
-        info: "",
-        type: "Classic Oversized T-Shirts",
-        types: [
-          "Classic Oversized T-Shirts",
-          "Standard Oversized T-Shirts",
-          "Hoodies",
-          "Zippers",
-        ],
-        mainImage: "",
-        additionalImage1: "",
-        additionalImage2: "",
-      });
-    } catch (error) {
-      console.error("Error adding product:", error);
-      alert("Failed to add product.");
-    }
-  };
-
-  const handleImageChange = (e) => {
-    const { name, value } = e.target;
-    setNewProduct({ ...newProduct, [name]: value });
-  };
-
-  const handleAddColor = () => {
-    setNewProduct((prev) => ({
-      ...prev,
-      colors: [...prev.colors, "#000000"],
-    }));
-  };
-
-  const handleRemoveColor = (index) => {
-    setNewProduct((prev) => ({
-      ...prev,
-      colors: prev.colors.filter((_, i) => i !== index),
-    }));
-  };
-
-  const handleColorChange = (index, value) => {
-    setNewProduct((prev) => ({
-      ...prev,
-      colors: prev.colors.map((color, i) => (i === index ? value : color)),
-    }));
-  };
-
-  const handleTypeChange = (e) => {
-    setNewProduct((prev) => ({
-      ...prev,
-      type: e.target.value,
-    }));
-  };
-
-  const handleAddType = () => {
-    const newType = prompt("Enter new product type:");
-    if (newType && !newProduct.types.includes(newType)) {
-      setNewProduct((prev) => ({
-        ...prev,
-        types: [...prev.types, newType],
-        type: newType,
-      }));
-    }
-  };
-
-  const formatInfo = (info) => {
-    return info.split("\n").filter((line) => line.trim() !== "");
   };
 
   return (
@@ -123,91 +67,86 @@ const AddProduct = () => {
           <input
             type="text"
             placeholder="Product Name"
-            value={newProduct.name}
-            onChange={(e) =>
-              setNewProduct({ ...newProduct, name: e.target.value })
-            }
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
         </div>
         <div className="form-group">
           <textarea
             placeholder="Details"
-            value={newProduct.details}
-            onChange={(e) =>
-              setNewProduct({ ...newProduct, details: e.target.value })
-            }
+            value={details}
+            onChange={(e) => setDetails(e.target.value)}
           />
         </div>
         <div className="form-group">
           <textarea
             placeholder="Additional Product Information (Use newline for bullet points)"
-            value={newProduct.info}
-            onChange={(e) =>
-              setNewProduct({ ...newProduct, info: e.target.value })
-            }
+            value={info}
+            onChange={(e) => setInfo(e.target.value)}
           />
         </div>
         <div className="form-group">
           <label htmlFor="type">Product Type</label>
-          <select id="type" value={newProduct.type} onChange={handleTypeChange}>
-            {newProduct.types.map((type, index) => (
+          <select id="type" value={type} onChange={(e) => setType(e.target.value)}>
+            {types.map((type, index) => (
               <option key={index} value={type}>
                 {type}
               </option>
             ))}
           </select>
-          <button onClick={handleAddType}>+ Add More Types</button>
         </div>
         <div className="sizes">
           <h3>Sizes</h3>
-          {["XS", "S", "M", "L", "XL", "XXL"].map((size) => (
-            <label key={size}>
+          {["XS", "S", "M", "L", "XL", "XXL"].map((sizeOption) => (
+            <label key={sizeOption}>
               <input
                 type="checkbox"
-                checked={newProduct.size.includes(size)}
+                checked={size.includes(sizeOption)}
                 onChange={(e) => {
-                  setNewProduct((prev) => ({
-                    ...prev,
-                    size: e.target.checked
-                      ? [...prev.size, size]
-                      : prev.size.filter((s) => s !== size),
-                  }));
+                  setSize((prev) => (
+                    e.target.checked
+                      ? [...prev, sizeOption]
+                      : prev.filter((s) => s !== sizeOption)
+                  ));
                 }}
               />
-              {size}
+              {sizeOption}
             </label>
           ))}
         </div>
         <div className="colors">
           <h3>Colors</h3>
-          {newProduct.colors.map((color, index) => (
+          {colors.map((color, index) => (
             <div key={index} className="color-input">
               <input
                 type="color"
                 value={color}
-                onChange={(e) => handleColorChange(index, e.target.value)}
+                onChange={(e) => {
+                  const updatedColors = [...colors];
+                  updatedColors[index] = e.target.value;
+                  setColors(updatedColors);
+                }}
               />
-              <button onClick={() => handleRemoveColor(index)}>Remove</button>
+              <button onClick={() => {
+                const updatedColors = colors.filter((_, i) => i !== index);
+                setColors(updatedColors);
+              }}>Remove</button>
             </div>
           ))}
-          <button onClick={handleAddColor}>Add Color</button>
+          <button onClick={() => setColors([...colors, ''])}>Add Color</button>
         </div>
         <div className="form-group">
           <input
             type="text"
             placeholder="Original Price"
-            value={newProduct.originalPrice}
-            onChange={(e) =>
-              setNewProduct({ ...newProduct, originalPrice: e.target.value })
-            }
+            value={originalPrice}
+            onChange={(e) => setOriginalPrice(e.target.value)}
           />
           <input
             type="text"
             placeholder="Sale Price"
-            value={newProduct.salePrice}
-            onChange={(e) =>
-              setNewProduct({ ...newProduct, salePrice: e.target.value })
-            }
+            value={salePrice}
+            onChange={(e) => setSalePrice(e.target.value)}
           />
         </div>
         <div className="form-group">
@@ -216,8 +155,8 @@ const AddProduct = () => {
             type="text"
             name="mainImage"
             placeholder="Enter the main image URL"
-            value={newProduct.mainImage}
-            onChange={handleImageChange}
+            value={mainImage}
+            onChange={(e) => setMainImage(e.target.value)}
           />
         </div>
         <div className="form-group">
@@ -226,8 +165,8 @@ const AddProduct = () => {
             type="text"
             name="additionalImage1"
             placeholder="Enter the first additional image URL"
-            value={newProduct.additionalImage1}
-            onChange={handleImageChange}
+            value={additionalImage1}
+            onChange={(e) => setAdditionalImage1(e.target.value)}
           />
         </div>
         <div className="form-group">
@@ -236,16 +175,16 @@ const AddProduct = () => {
             type="text"
             name="additionalImage2"
             placeholder="Enter the second additional image URL"
-            value={newProduct.additionalImage2}
-            onChange={handleImageChange}
+            value={additionalImage2}
+            onChange={(e) => setAdditionalImage2(e.target.value)}
           />
         </div>
-        <button onClick={handleAddProduct}>Add Product</button>
+        <button onClick={addProduct}>Add Product</button>
       </div>
       <div className="product-info">
         <h3>Additional Product Information</h3>
         <ul>
-          {formatInfo(newProduct.info).map((line, index) => (
+          {info.split('\n').filter(line => line.trim() !== '').map((line, index) => (
             <li key={index}>{line}</li>
           ))}
         </ul>

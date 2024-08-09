@@ -62,7 +62,7 @@
     }
   }
 
-  .products {
+  .product-list {
     padding: 50px 20px;
 
     h2 {
@@ -71,7 +71,63 @@
       margin-bottom: 40px;
     }
 
-    /* Add styles for product listings here */
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        background: #fff;
+        border-radius: 18px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin: 15px;
+        overflow: hidden;
+        width: 300px;
+        text-align: center;
+        position: relative;
+        transition: transform 0.3s ease; /* Transition for scaling effect */
+
+        img {
+          width: 100%;
+          height: auto;
+          object-fit: cover;
+        }
+
+        .product-info {
+          padding: 15px;
+
+          h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+          }
+
+          .price {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .original-price {
+              font-size: 1rem;
+              color: #999;
+              text-decoration: line-through;
+              margin-bottom: 5px;
+            }
+
+            .sale-price {
+              font-size: 1.25rem;
+              color: #e60023;
+            }
+          }
+        }
+
+        &:hover {
+          transform: scale(1.01); /* Slightly enlarge the card */
+        }
+      }
+    }
   }
 
   @media (max-width: 768px) {
