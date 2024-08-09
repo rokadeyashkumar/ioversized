@@ -22,8 +22,8 @@ function Footer() {
           <div className="footer-section">
             <h3>Follow Us</h3>
             <div className="social-icons">
-              <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer"><FaFacebookF /></a>
-              <a href="https://www.facebook.com/profile.php?id=100092350096485" target="_blank" rel="noopener noreferrer"><FaTwitter /></a>
+              <a href="https://www.facebook.com/profile.php?id=100092350096485" target="_blank" rel="noopener noreferrer"><FaFacebookF /></a>
+              <a href="https://x.com/ioversized25642" target="_blank" rel="noopener noreferrer"><FaTwitter /></a>
               <a href="https://www.instagram.com/ioversized/" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
               <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer"><FaLinkedinIn /></a>
             </div>

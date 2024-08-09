@@ -1,9 +1,10 @@
 // frontend/src/pages/home.js
 import React, { useState, useEffect } from 'react';
 import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Import the carousel styles
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { Link } from 'react-router-dom';
 import './style/home.scss';
-import axios from 'axios';
+import axios from './dashboard/service/axios'; // Adjust path if necessary
 
 // Import images
 import img1 from './img/img1.png';
@@ -13,16 +14,16 @@ const Home = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchdata = async () => {
       try {
-        const response = await axios.get('/product/get');
+        const response = await axios.get('/products/get');
+        console.log("Product data:", response.data);
         setProducts(response.data);
       } catch (error) {
-        console.error('Error fetching products:', error);
+        console.error("Error fetching product data:", error);
       }
     };
-
-    fetchProducts();
+    fetchdata();
   }, []);
 
   return (
@@ -38,33 +39,26 @@ const Home = () => {
           {/* Add more slides as needed */}
         </Carousel>
       </section>
-      <section className="products">
+      
+      <section className="product-list">
         <h2>Products</h2>
-        <div className="product-list">
+        <ul>
           {products.map((product) => (
-            <div key={product._id} className="product-card">
-              <h3>{product.name}</h3>
-              <p className="price-original">₹{product.priceOriginal}</p>
-              <p className="price-discounted">₹{product.priceDiscounted}</p>
-              <p>Type: {product.type}</p>
-              <div className="product-details">
-                {product.details.map((detail, index) => (
-                  <li key={index}>{detail}</li>
-                ))}
-              </div>
-              <div className="product-colors">
-                {product.colors.map((color, index) => (
-                  <span key={index} style={{ backgroundColor: color }} className="color-swatch" />
-                ))}
-              </div>
-              <div className="product-sizes">
-                {product.size.map((size, index) => (
-                  <span key={index} className="size">{size}</span>
-                ))}
-              </div>
-            </div>
+            <li key={product._id}>
+              <Link to={`/product/${product._id}`}>
+                <img src={product.mainImage} alt={product.name} />
+                <div className="product-info">
+                  <h3>{product.name}</h3>
+                  <p>{product.details}</p>
+                  <div className="price">
+                    <span className="original-price">₹{product.originalPrice}.00</span>
+                    <span className="sale-price">₹{product.salePrice}.00</span>
+                  </div>
+                </div>
+              </Link>
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
     </div>
   );
