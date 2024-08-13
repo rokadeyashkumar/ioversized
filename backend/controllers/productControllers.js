@@ -1,7 +1,5 @@
-const Product = require('../models/productSchema');
-
 exports.addProduct = async (req, res) => {
-  const { name, originalPrice, salePrice, size, colors, details, info, type, mainImage, additionalImage1, additionalImage2 } = req.body;
+  const { name, originalPrice, salePrice, size, colors, details, info, type, mainImage, additionalImages, paymentLink } = req.body;
 
   if (!name || !originalPrice || !salePrice) {
     return res.status(400).json({ error: 'Please fill out all required fields.' });
@@ -12,13 +10,14 @@ exports.addProduct = async (req, res) => {
       name,
       originalPrice,
       salePrice,
-      size: size ? size.split(',') : [], // Ensure size is handled correctly
-      colors: colors ? colors.split(',') : [], // Ensure colors is handled correctly
+      size,
+      colors,
       details,
       info,
       type,
       mainImage,
-      additionalImages: [additionalImage1, additionalImage2].filter(Boolean) // Filter out empty strings
+      additionalImages: additionalImages || [],  // Handle additional images
+      paymentLink  // Add paymentLink
     });
 
     const savedProduct = await product.save();
@@ -26,5 +25,36 @@ exports.addProduct = async (req, res) => {
   } catch (error) {
     console.error('Error adding product:', error);
     return res.status(500).json({ error: 'Failed to add product.' });
+  }
+};
+
+// Update existing product
+exports.updateProduct = async (req, res) => {
+  const { id } = req.params;
+  const { name, originalPrice, salePrice, size, colors, details, info, type, mainImage, additionalImages, paymentLink } = req.body;
+
+  try {
+    const updatedProduct = await Product.findByIdAndUpdate(id, {
+      name,
+      originalPrice,
+      salePrice,
+      size,
+      colors,
+      details,
+      info,
+      type,
+      mainImage,
+      additionalImages: additionalImages || [],
+      paymentLink  // Update paymentLink
+    }, { new: true });
+
+    if (!updatedProduct) {
+      return res.status(404).json({ error: 'Product not found' });
+    }
+
+    return res.status(200).json(updatedProduct);
+  } catch (error) {
+    console.error('Error updating product:', error);
+    return res.status(500).json({ error: 'Failed to update product.' });
   }
 };

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { adminLoginFunction } from '../services/apis';
+import { adminLoginFunction } from '../services/apis'; // Ensure path is correct
 
 const Admin = () => {
   const [adminID, setAdminID] = useState("");

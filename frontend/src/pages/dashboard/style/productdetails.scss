@@ -1,37 +1,110 @@
 .product-details {
-    margin-bottom: 20px;
-  
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; // Center the content horizontally
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%; // Ensure the header takes full width
+    margin-bottom: 20px; // Space between header and table
+
     h2 {
-      margin-bottom: 10px;
+      flex: 1;
+      text-align: center;
+      margin: 0;
     }
-  
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-  
-      th,
-      td {
-        padding: 10px;
-        border: 1px solid #ddd;
-        text-align: left;
+
+    .filter {
+      margin-left: auto;
+
+      select {
+        padding: 5px;
+        font-size: 16px;
       }
-  
-      th {
-        background-color: #f4f4f4;
-      }
-  
-      button {
-        padding: 5px 10px;
-        background-color: #000000;
-        color: #fff;
-        border: none;
-        cursor: pointer;
-  
-        &:hover {
-          background-color: #252525;
+    }
+  }
+
+  .table-container {
+    display: flex;
+    width: 100%; // Ensure the table container takes full width
+
+    .table-wrapper {
+      width: 100%; // Ensure the table takes the remaining width
+      overflow-x: auto; // Handle overflow for large tables
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+
+        thead {
+          tr {
+            th {
+              padding: 15px;
+              border: 1px solid #ddd;
+              background-color: #f4f4f4;
+              text-align: left;
+            }
+          }
+        }
+
+        tbody {
+          tr {
+            td {
+              padding: 15px;
+              border: 1px solid #ddd;
+              text-align: left;
+              word-break: break-word;
+
+              input[type="text"], input[type="number"] {
+                border: 1px solid #ddd;
+                padding: 8px;
+                width: 100%;
+                box-sizing: border-box;
+              }
+
+              textarea {
+                border: 1px solid #ddd;
+                padding: 8px;
+                width: 100%;
+                box-sizing: border-box;
+                height: 100px;
+                resize: vertical;
+              }
+
+              .color-circle {
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                margin-right: 5px;
+                border: 1px solid #ddd;
+                vertical-align: middle;
+              }
+
+              label {
+                display: block;
+                margin-bottom: 5px;
+              }
+            }
+          }
+        }
+
+        button {
+          padding: 8px 12px;
+          background-color: #000;
+          color: #fff;
+          border: none;
+          cursor: pointer;
+          margin-right: 5px;
+
+          &:hover {
+            background-color: #333;
+          }
         }
       }
     }
   }
-  
+}

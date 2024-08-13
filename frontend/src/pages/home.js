@@ -1,14 +1,14 @@
-// frontend/src/pages/home.js
 import React, { useState, useEffect } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'; // Import Link
 import './style/home.scss';
 import axios from './dashboard/service/axios'; // Adjust path if necessary
 
 // Import images
 import img1 from './img/img1.png';
 import img2 from './img/img2.png';
+import winterCollectionImg from './img/winter-collection.png'; // New image for winter collection
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -39,9 +39,9 @@ const Home = () => {
           {/* Add more slides as needed */}
         </Carousel>
       </section>
-      
+
       <section className="product-list">
-        <h2>Products</h2>
+        <h2>Our Products</h2>
         <ul>
           {products.map((product) => (
             <li key={product._id}>
@@ -60,6 +60,17 @@ const Home = () => {
           ))}
         </ul>
       </section>
+
+      <div className="new-feature">
+        <img src={winterCollectionImg} alt="Winter Collection" />
+        <Link to="/products">
+          <button className="new-feature-btn">Explore</button> {/* Updated button */}
+        </Link>
+      </div>
+
+      <div className="new-feature-2">
+        <p>Feel comfort</p>
+      </div>
     </div>
   );
 };
