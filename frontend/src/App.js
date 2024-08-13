@@ -9,7 +9,10 @@ import Register from './pages/register';
 import Dashboard from './pages/dashboard';
 import Error from './pages/error';
 import Otp from './pages/otp';
+import ContactUs from './pages/contactUs';
+import Checkout from './pages/checkout';
 import Headers from './components/headers';
+import AboutUs from './pages/aboutUs';
 import Footer from './components/footer';
 import './App.css';
 
@@ -19,6 +22,8 @@ function App() {
       <Headers />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/aboutUs" element={<AboutUs />} />
+        <Route path="/checkout" element={<Checkout />} />
         <Route path="/products" element={<Products />} />
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/admin" element={<Admin />} />
@@ -27,6 +32,7 @@ function App() {
         <Route path="/admin/dashboard" element={<Dashboard />} />
         <Route path="/user/otp" element={<Otp />} />
         <Route path="*" element={<Error />} />
+        <Route path="/contactUs" element={<ContactUs />} />
       </Routes>
       <Footer />
     </>

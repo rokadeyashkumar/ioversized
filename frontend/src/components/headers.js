@@ -11,6 +11,7 @@ const Header = () => {
         <nav>
           <ul>
             <li><Link to="/">Home</Link></li>
+            <li><Link to="/aboutUs">About Us</Link></li>
             <li><Link to="/products">Products</Link></li> {/* Added Products route */}
             <li><Link to="/checkout">Checkout</Link></li> {/* Added Checkout route */}
             <li><Link to="/admin">Admin</Link></li>

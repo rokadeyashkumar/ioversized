@@ -14,7 +14,7 @@ function Footer() {
           <div className="footer-section">
             <h3>Customer Service</h3>
             <ul>
-              <li><a href="/contact">Contact Us</a></li>
+              <li><a href="/contactUs">Contact Us</a></li>
               <li><a href="/returns">Returns</a></li>
               <li><a href="/shipping">Shipping Information</a></li>
             </ul>

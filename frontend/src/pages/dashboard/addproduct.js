@@ -13,13 +13,19 @@ const AddProduct = () => {
     'Hoodies',
     'Zippers',
   ]);
+  const [newType, setNewType] = useState(""); // New state for custom product type
   const [size, setSize] = useState([]);
   const [colors, setColors] = useState(['']);
   const [originalPrice, setOriginalPrice] = useState("");
   const [salePrice, setSalePrice] = useState("");
   const [mainImage, setMainImage] = useState("");
-  const [additionalImage1, setAdditionalImage1] = useState("");
-  const [additionalImage2, setAdditionalImage2] = useState("");
+  const [additionalImages, setAdditionalImages] = useState(["", ""]); // Initialize with empty strings
+
+  const handleAdditionalImageChange = (index, value) => {
+    const updatedImages = [...additionalImages];
+    updatedImages[index] = value;
+    setAdditionalImages(updatedImages);
+  };
 
   const addProduct = (e) => {
     e.preventDefault();
@@ -34,8 +40,7 @@ const AddProduct = () => {
       originalPrice,
       salePrice,
       mainImage,
-      additionalImage1,
-      additionalImage2,
+      additionalImages, // Pass the array of additional images
     };
 
     axios.post("/products/add", productData)
@@ -50,13 +55,20 @@ const AddProduct = () => {
         setOriginalPrice('');
         setSalePrice('');
         setMainImage('');
-        setAdditionalImage1('');
-        setAdditionalImage2('');
+        setAdditionalImages(["", ""]); // Reset to initial state
+        setNewType(''); // Clear the new type input
       })
       .catch((error) => {
         console.error('Error adding product:', error.response ? error.response.data : error.message);
         alert('Error adding product. Please check the console for more details.');
       });
+  };
+
+  const handleAddType = () => {
+    if (newType && !types.includes(newType)) {
+      setTypes([...types, newType]);
+      setNewType(''); // Clear the new type input after adding
+    }
   };
 
   return (
@@ -94,6 +106,15 @@ const AddProduct = () => {
               </option>
             ))}
           </select>
+        </div>
+        <div className="form-group">
+          <input
+            type="text"
+            placeholder="Add New Product Type"
+            value={newType}
+            onChange={(e) => setNewType(e.target.value)}
+          />
+          <button type="button" onClick={handleAddType}>Add Type</button>
         </div>
         <div className="sizes">
           <h3>Sizes</h3>
@@ -153,7 +174,6 @@ const AddProduct = () => {
           <label>Main Image URL</label>
           <input
             type="text"
-            name="mainImage"
             placeholder="Enter the main image URL"
             value={mainImage}
             onChange={(e) => setMainImage(e.target.value)}
@@ -163,20 +183,18 @@ const AddProduct = () => {
           <label>Additional Image 1 URL</label>
           <input
             type="text"
-            name="additionalImage1"
             placeholder="Enter the first additional image URL"
-            value={additionalImage1}
-            onChange={(e) => setAdditionalImage1(e.target.value)}
+            value={additionalImages[0]}
+            onChange={(e) => handleAdditionalImageChange(0, e.target.value)}
           />
         </div>
         <div className="form-group">
           <label>Additional Image 2 URL</label>
           <input
             type="text"
-            name="additionalImage2"
             placeholder="Enter the second additional image URL"
-            value={additionalImage2}
-            onChange={(e) => setAdditionalImage2(e.target.value)}
+            value={additionalImages[1]}
+            onChange={(e) => handleAdditionalImageChange(1, e.target.value)}
           />
         </div>
         <button onClick={addProduct}>Add Product</button>

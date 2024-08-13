@@ -1,75 +1,159 @@
-// frontend/src/pages/style/productDetail.scss
 .product-detail {
-    padding: 20px;
+  padding: 20px;
+  display: flex;
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .image-section {
+    flex: 2; // Allocate more space for the image
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-  
-    img {
-      width: 100%;
-      max-width: 600px;
-      height: auto;
-      object-fit: cover;
-      border-radius: 12px;
-      margin-bottom: 20px;
+    align-items: flex-start;
+    position: relative;
+    margin-right: 40px; // Adjust margin as needed
+
+    .main-image {
+      flex: 1;
+      img {
+        width: 100%;
+        max-width: 700px; // Increased size for the main image
+        height: auto;
+        object-fit: cover;
+        border-radius: 12px;
+      }
     }
-  
-    .product-info {
-      text-align: center;
-      max-width: 600px;
-      width: 100%;
-  
-      h2 {
-        font-size: 2rem;
-        margin-bottom: 15px;
-        color: #333;
-      }
-  
-      .price {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 15px;
-  
-        .original-price {
-          font-size: 1.5rem;
-          color: #999;
-          text-decoration: line-through;
-          margin-bottom: 5px;
-        }
-  
-        .sale-price {
-          font-size: 1.75rem;
-          color: #e60023;
-          font-weight: bold;
-        }
-      }
-  
-      p {
-        font-size: 1rem;
-        color: #333;
-        line-height: 1.6;
-      }
-  
-      .buttons {
-        margin-top: 20px;
-  
-        button {
-          margin: 5px 10px;
-          padding: 10px 20px;
-          border: none;
-          border-radius: 5px;
-          background-color: #000000;
-          color: white;
-          cursor: pointer;
-  
-          &:hover {
-            background-color: #1a1a1a;
-          }
+
+    .additional-images {
+      position: absolute;
+      left: -120px; // Adjusted position to avoid overlap
+      top: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      .additional-image {
+        width: 100px; // Size for additional images
+        height: auto;
+        object-fit: cover;
+        border-radius: 8px;
+        cursor: pointer;
+        border: 2px solid #ddd;
+
+        &:hover {
+          border-color: #333;
         }
       }
     }
   }
-  
+
+  .info-section {
+    flex: 2; // Increased flex to make more space for text area
+    display: flex;
+    flex-direction: column;
+
+    h2 {
+      font-size: 1.8rem; // Font size for the product name
+      margin-bottom: 15px; // Increased margin
+      color: #333;
+    }
+
+    p {
+      font-size: 1rem; // Increased font size for details
+      color: #333;
+      line-height: 1.6;
+      margin-bottom: 20px; // Increased margin
+    }
+
+    .attributes {
+      margin-bottom: 20px; // Increased margin
+
+      .colors,
+      .sizes {
+        margin-bottom: 20px;
+
+        h3 {
+          font-size: 1.4rem; // Increased font size for section headers
+          margin-bottom: 10px;
+          color: #333;
+        }
+
+        .color-list {
+          display: flex;
+          flex-wrap: wrap;
+
+          .color-circle {
+            width: 35px; // Slightly increased size for color circles
+            height: 35px;
+            border-radius: 50%;
+            margin: 5px;
+            border: 2px solid #ccc;
+            display: inline-block;
+            cursor: pointer;
+          }
+        }
+
+        ul {
+          list-style-type: none;
+          padding: 0;
+
+          li {
+            font-size: 1rem; // Increased font size for sizes
+            margin: 5px 0;
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            display: inline-block;
+            margin-right: 10px;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    .price {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px; // Increased margin
+
+      .original-price {
+        font-size: 1.3rem; // Increased font size for original price
+        color: #999;
+        text-decoration: line-through;
+        margin-bottom: 5px;
+      }
+
+      .sale-price {
+        font-size: 1.6rem; // Increased font size for sale price
+        color: #e60023;
+        font-weight: bold;
+      }
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column; // Stack buttons vertically
+      gap: 15px; // Space between buttons
+
+      button {
+        padding: 15px 50px; // Increased button size
+        border: 2px solid #000; // Border color
+        border-radius: 5px;
+        background-color: transparent; // Remove button fill color
+        color: #000; // Text color
+        cursor: pointer;
+        font-size: 14px; // Increased font size for buttons
+        font-weight: 500;
+        transition: background-color 0.3s, color 0.3s; // Smooth transition effect
+
+        &:hover {
+          background-color: #000; // Fill color on hover
+          color: #fff; // Text color on hover
+        }
+      }
+    }
+
+    > div {
+      margin-top: 20px; // Increased margin for additional div
+    }
+  }
+}

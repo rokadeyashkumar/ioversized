@@ -1,31 +1,20 @@
-const mongoose = require('mongoose');
+// backend/models/productSchema.js
+const mongoose = require("mongoose");
 
 const productSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  originalPrice: {
-    type: Number,
-    required: true
-  },
-  salePrice: {
-    type: Number,
-    required: true
-  },
+  name: String,
+  originalPrice: Number,
+  salePrice: Number,
   size: [String],
-  colors: [String],
+  colors: [String],  // Ensure this is defined as an array of strings
   details: String,
   info: String,
-  type: {
-    type: String,
-    default: 'Classic Oversized T-Shirts'
-  },
+  type: String,
   mainImage: String,
-  additionalImages: [String] // This will store additional images as an array
+  additionalImages: [String],
+  paymentLink: String
 });
 
-// creating model
-const Products = mongoose.model('Products', productSchema);
+const Product = mongoose.model("Product", productSchema);
 
-module.exports = Products;
+module.exports = Product;
