@@ -2,7 +2,7 @@
 #Run
 - frontend
   ```
-  react-scripts start
+  npm start
   ```
 - backend
   ```
