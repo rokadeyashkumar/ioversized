@@ -4,31 +4,28 @@ import './style/aboutUs.scss';
 const AboutUs = () => {
   return (
     <div className="about-us">
-      <header className="about-us-header">
-        <h1>About Us</h1>
-      </header>
+      
       <section className="about-us-content">
         <div className="about-us-text">
-          <h2>Who We Are</h2>
+          
           <p>
-            We are a leading provider of oversized t-shirts and hoodies, dedicated to offering the best in comfort and style. Our mission is to make sure you feel great in our clothing while also making a positive impact in our community.
+            Welcome to <strong>ioversized</strong>!
           </p>
           <p>
-            Founded in [Year], we have been committed to quality and customer satisfaction from day one. Our team of professionals works tirelessly to bring you the latest trends and timeless classics.
+            We’re Akshaykumar Rokade and Yashkumar Rokade, the founders of this unique clothing brand. Our journey began with a simple observation: when searching for the perfect plain and oversized t-shirt, we found ourselves frustrated by the lack of options. Every brand seemed to add their own logos, texts, and designs, leaving us with no choice but to settle for something that wasn’t quite right.
           </p>
-
-          <h2>Our Mission</h2>
           <p>
-            Our mission is to deliver comfort and style through our oversized clothing line while maintaining a commitment to sustainability and social responsibility. We aim to exceed your expectations with every product we offer.
+            This frustration sparked a decision to create something different. We envisioned a brand dedicated to offering high-quality, plain, and oversized t-shirts that truly stand out by their simplicity. In 2023, we launched <strong>ioversized</strong> with a commitment to bringing you the best in comfort and style, without unnecessary embellishments.
           </p>
-
-          <h2>Our Values</h2>
-          <ul>
-            <li><strong>Quality:</strong> We prioritize top-quality materials and craftsmanship.</li>
-            <li><strong>Customer Focus:</strong> Your satisfaction is our top priority.</li>
-            <li><strong>Sustainability:</strong> We are committed to eco-friendly practices.</li>
-            <li><strong>Innovation:</strong> We continuously strive to bring fresh designs to the market.</li>
-          </ul>
+          <p>
+            At <strong>ioversized</strong>, we pride ourselves on not just the quality of our products, but also on our exceptional customer service. We noticed a gap in the market where many brands fall short in providing a truly satisfying customer experience. Our goal is to fill that gap by ensuring each interaction with us is smooth, responsive, and tailored to your needs.
+          </p>
+          <p>
+            Our products are as fresh as our approach. We operate on a made-to-order basis, which means each item is manufactured specifically for you after you place an order. This process ensures that our products are always new and meet your expectations. From our workshop to your doorstep, you can expect delivery within 5-7 days, with every detail attended to.
+          </p>
+          <p>
+            Thank you for choosing <strong>ioversized</strong>. We’re excited to share our passion for plain, oversized fashion with you and look forward to becoming your go-to source for the essentials you’ve been searching for.
+          </p>
         </div>
       </section>
     </div>

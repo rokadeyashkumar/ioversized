@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaSignInAlt, FaShoppingCart } from 'react-icons/fa';
+import { FaUserCircle, FaShoppingCart,  } from 'react-icons/fa';
 import './style/header.scss';
 import logo from '../logo.svg';
 
@@ -25,7 +25,7 @@ const Header = () => {
         </div>
         <div className="icons">
           <Link to="/cart"><FaShoppingCart /></Link>
-          <Link to="/login"><FaSignInAlt /></Link>
+          <Link to="/login"><FaUserCircle /></Link>
         </div>
       </div>
     </header>

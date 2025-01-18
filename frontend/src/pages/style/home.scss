@@ -5,7 +5,7 @@
     padding: 0;
     overflow: hidden;
     position: relative;
-    margin-top: -200px;
+    margin-top: -220px; /* Reduced top margin to minimize space above */
     z-index: 0;
 
     .carousel .slide {
@@ -19,13 +19,119 @@
     }
   }
 
+  .sale-banner-1 {
+    position: relative;
+    width: 100%; /* Ensure full viewport width */
+    margin: 0; /* Remove margin */
+    margin-top: -23%;
+    margin-bottom: 2%;
+    padding: 0; /* Remove padding */
+    overflow: hidden; /* Hide overflow */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    height: 300px; /* Reduced height to decrease top and bottom space */
+
+    img {
+      width: 100%; /* Ensure image covers full viewport width */
+
+      object-fit: cover; /* Cover the container */
+    }
+
+    .sale-banner-content {
+      position: absolute;
+      top: 50%; /* Center text vertically */
+      left: 50%; /* Center text horizontally */
+      transform: translate(-50%, -50%); /* Center content */
+      color: #ffffff; /* White text color */
+      text-align: center; /* Center align text */
+      width: 100%; /* Ensure text takes full width */
+      padding: 0 10px; /* Reduced padding for less space */
+
+      h2 {
+        margin: 0;
+        font-size: 1.5rem; /* Adjust size as needed */
+        font-weight: 700; /* Bold font weight */
+      }
+      
+      p {
+        color: #ffffff; /* White text color */
+        margin-top: 5px; /* Reduced space above the paragraph */
+      }
+
+      .shop-now-btn {
+        background-color: #ffffff; /* Black button background */
+        color: #000000; /* White text color */
+        border: none;
+        padding: 10px 20px; /* Reduced padding */
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px; /* Adjust font size */
+        font-weight: 600;
+        margin-top: 10px; /* Space above the button */
+        width: auto; /* Adjust width based on content */
+        max-width: 180px; /* Max-width for the button */
+      }
+    }
+  }
+
+  .banner-2 {
+    position: relative;
+    width: 55%;
+    height: auto;
+
+    overflow: hidden;
+    object-fit: cover;
+    text-align: center;
+    margin: auto;
+    margin-top: -15%;
+    
+    img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .banner-content {
+      position: absolute;
+      top: 85%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #ffffff;
+      text-align: center;
+      width: 100%;
+
+      h2 {
+        margin: 0;
+        font-size: 2rem;
+        font-weight: 700;
+      }
+
+      .shop-now-btn {
+        background-color: #ffffff;
+        color: #000000;
+        border: none;
+        padding: 13px 30px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        margin-top: 12px;
+        width: auto;
+        max-width: 200px;
+      }
+    }
+  }
+
+
   .product-list {
-    padding: 50px 20px;
+    padding: 30px 10px; /* Reduced padding */
+    margin-top: -220px;
+    margin-bottom: -220px;
 
     h2 {
       text-align: center;
-      font-size: 2rem;
-      margin-bottom: 40px;
+      font-size: 1.5rem; /* Adjust font size if needed */
+      margin-bottom: 20px; /* Reduced bottom margin */
     }
 
     ul {
@@ -38,44 +144,71 @@
 
       li {
         background: #fff;
-        border-radius: 18px;
+        border-radius: 14px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        margin: 15px;
+        margin: 10px; /* Reduced margin */
         overflow: hidden;
-        width: 300px;
-        text-align: center;
+        width: 280px; /* Adjust width as needed */
+        text-align: left;
         position: relative;
         transition: transform 0.3s ease;
 
         img {
           width: 100%;
-          height: auto;
+          height: 300px; /* Maintain image height */
           object-fit: cover;
         }
 
         .product-info {
-          padding: 15px;
+          padding: 10px; /* Reduced padding */
 
           h3 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
+            font-size: 12px; /* Reduced font size */
+            margin-bottom: 5px; /* Reduced margin */
+            font-family: Arial, sans-serif;
+            font-weight: 400;
+            color: #000000;
           }
 
           .price {
             display: flex;
-            flex-direction: column;
             align-items: center;
-
-            .original-price {
-              font-size: 1rem;
-              color: #999;
-              text-decoration: line-through;
-              margin-bottom: 5px;
-            }
+            gap: 8px; /* Reduced gap */
 
             .sale-price {
-              font-size: 1.25rem;
+              font-size: 12px; /* Reduced font size */
               color: #e60023;
+              font-weight: 600;
+            }
+
+            .original-price {
+              font-size: 12px; /* Reduced font size */
+              color: #000000;
+              text-decoration: line-through;
+              font-weight: 400;
+            }
+          }
+
+          .color-list {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-top: 5px; /* Reduced margin */
+
+            .color-circle {
+              width: 8px; /* Reduced size */
+              height: 8px; /* Reduced size */
+              border-radius: 50%;
+              margin: 1px; /* Reduced margin */
+              border: 1px solid #ccc;
+              display: inline-block;
+            }
+
+            .additional-colors {
+              font-size: 12px; /* Reduced font size */
+              color: #333;
+              margin-left: 5px;
+              font-weight: 400;
             }
           }
         }
@@ -87,10 +220,15 @@
     }
   }
 
+
+  // new feature banner
   .new-feature {
     position: relative;
     width: 70%;
+    
     margin: 20px auto; /* Center the card */
+
+    margin-bottom: -220px;
     overflow: hidden; /* Ensure content does not overflow during hover */
   
     img {
@@ -114,8 +252,6 @@
       font-size: 0.9rem; /* Adjust font size if needed */
       z-index: 1; /* Ensure the button is above the image */
       transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions for button */
-      
-      
     }
   
     &:hover {
@@ -125,11 +261,65 @@
     }
   }
   
-.new-feature-2{
-  width: 100%;
-  height: 5%;
-  background-color: #000000;
-}
+  .new-feature-2 {
+    width: 100%;
+    height: 5%;
+    background-color: #000000;
+  }
+
+  // banner 3 (sale or new product banner)
+  .sale-banner-3 {
+    position: relative;
+    width: 100%; /* Ensure full viewport width */
+    margin-top: 30px;
+   
+    padding: 0; /* Remove padding */
+    overflow: hidden; /* Hide overflow */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+     /* Reduced height to decrease top and bottom space */
+
+    img {
+      width: 100%; /* Ensure image covers full viewport width */
+      object-fit: cover; /* Cover the container */
+    }
+
+    .sale-banner-content {
+      position: absolute;
+      top: 50%; /* Center text vertically */
+      left: 50%; /* Center text horizontally */
+      transform: translate(-50%, -50%); /* Center content */
+      color: #ffffff; /* White text color */
+      text-align: center; /* Center align text */
+      width: 100%; /* Ensure text takes full width */
+      padding: 0 10px; /* Reduced padding for less space */
+
+      h2 {
+        margin: 0;
+        font-size: 1.5rem; /* Adjust size as needed */
+        font-weight: 700; /* Bold font weight */
+      }
+      
+      p {
+        color: #ffffff; /* White text color */
+        margin-top: 5px; /* Reduced space above the paragraph */
+      }
+
+      .shop-now-btn {
+        background-color: #ffffff; /* Black button background */
+        color: #000000; /* White text color */
+        border: none;
+        padding: 10px 20px; /* Reduced padding */
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px; /* Adjust font size */
+        font-weight: 600;
+        margin-top: 10px; /* Space above the button */
+        width: auto; /* Adjust width based on content */
+        max-width: 180px; /* Max-width for the button */
+      }
+    }
+  }
+
   @media (max-width: 768px) {
     .carousel-container {
       height: auto;

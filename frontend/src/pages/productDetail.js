@@ -1,7 +1,7 @@
-// frontend/src/pages/productDetail.js
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from './dashboard/service/axios'; // Ensure the path is correct
+import { FaTruck } from 'react-icons/fa';
 import './style/productDetail.scss'; // Import the styling
 
 const ProductDetail = () => {
@@ -10,6 +10,10 @@ const ProductDetail = () => {
   const [error, setError] = useState(null);
   const [selectedImage, setSelectedImage] = useState(''); // State for selected image
   const { id } = useParams(); // Get the product ID from URL
+
+  const [isInfoOpen, setIsInfoOpen] = useState(false); // State for Product Info dropdown
+  const [isSizeFitOpen, setIsSizeFitOpen] = useState(false); // State for Size & Fit dropdown
+  const [isCareGuideOpen, setIsCareGuideOpen] = useState(false); // State for Care Guide dropdown
 
   useEffect(() => {
     const fetchProductDetail = async () => {
@@ -47,6 +51,13 @@ const ProductDetail = () => {
       console.error('Payment link not available');
       alert('Payment link is not available for this product.');
     }
+  };
+
+  const formatProductInfo = (info) => {
+    // Split info into bullet points
+    return info.split('\n').map((line, index) => (
+      <li key={index}>{line}</li>
+    ));
   };
 
   return (
@@ -121,8 +132,86 @@ const ProductDetail = () => {
           <button onClick={() => handleAddToCart(product)}>Add to Cart</button>
           <button onClick={() => handleBuyNow(product)}>Buy Now</button>
         </div>
-        <div>
-          <p>{product.info}</p>
+
+        <div className="delivery-details">
+      <FaTruck className="truck-icon" />
+      <p>1F69A</p>
+      <p>Delivery Time: 5-7 days</p>
+    </div>
+
+        {/* Horizontal line below the buttons */}
+        <hr />
+
+        {/* Product Info dropdown */}
+        <div className="dropdown-section">
+          <div className="dropdown-header" onClick={() => setIsInfoOpen(!isInfoOpen)}>
+            <h3>Product Info</h3>
+            <i className={`arrow ${isInfoOpen ? 'up' : 'down'}`}></i>
+          </div>
+          {isInfoOpen && (
+            <div className="dropdown-content">
+              <ul>
+                {product.info ? formatProductInfo(product.info) : <li>No product info available</li>}
+              </ul>
+            </div>
+          )}
+        </div>
+
+        {/* Horizontal line between sections */}
+        <hr />
+
+        {/* Size & Fit dropdown */}
+        <div className="dropdown-section">
+          <div className="dropdown-header" onClick={() => setIsSizeFitOpen(!isSizeFitOpen)}>
+            <h3>Size & Fit</h3>
+            <i className={`arrow ${isSizeFitOpen ? 'up' : 'down'}`}></i>
+          </div>
+          {isSizeFitOpen && (
+            <div className="dropdown-content">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Size</th>
+                    <th>Chest (in)</th>
+                    <th>Length (in)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {product.sizeFit ? (
+                    product.sizeFit.map((fit, index) => (
+                      <tr key={index}>
+                        <td>{fit.size}</td>
+                        <td>{fit.chest}</td>
+                        <td>{fit.length}</td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="3">Size & Fit info not available</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+
+        {/* Horizontal line between sections */}
+        <hr />
+
+        {/* Care Guide dropdown */}
+        <div className="dropdown-section">
+          <div className="dropdown-header" onClick={() => setIsCareGuideOpen(!isCareGuideOpen)}>
+            <h3>Care Guide</h3>
+            <i className={`arrow ${isCareGuideOpen ? 'up' : 'down'}`}></i>
+          </div>
+          {isCareGuideOpen && (
+            <div className="dropdown-content">
+              <ul>
+                {product.careGuide ? formatProductInfo(product.careGuide) : <li>No care guide available</li>}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </div>
