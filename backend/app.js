@@ -4,6 +4,7 @@ const app = express();
 const cors = require("cors");
 require("./db/conn"); // Ensure this file connects to MongoDB properly
 const Products = require("./models/productSchema"); // Ensure this schema is defined
+const users = require("./models/userSchema"); 
 const router = require('./routes/router'); // Import the router
 const PORT = 5000;
 
@@ -104,6 +105,47 @@ app.delete('/products/delete/:id', async (req, res) => {
     } catch (error) {
         console.error("Error deleting product:", error.message);
         res.status(500).json({ message: "Failed to delete product", error: error.message });
+    }
+});
+
+// Display all users
+app.get('/users/get', async (req, res) => {
+    try {
+        const usersList = await users.find(); // Ensure 'users' is the correct model name
+        res.status(200).json(usersList);
+    } catch (err) {
+        console.error("Error fetching users:", err.message);
+        res.status(500).json({ message: "Failed to fetch users", error: err.message });
+    }
+});
+
+// Update user by ID
+app.put('/users/update/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const updatedUser = await users.findByIdAndUpdate(id, req.body, { new: true });
+        if (!updatedUser) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        res.status(200).json(updatedUser);
+    } catch (error) {
+        console.error("Error updating user:", error.message);
+        res.status(500).json({ message: "Failed to update user", error: error.message });
+    }
+});
+
+// Delete user by ID
+app.delete('/users/delete/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const deletedUser = await users.findByIdAndDelete(id);
+        if (!deletedUser) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        res.status(200).json({ message: 'User deleted successfully' });
+    } catch (error) {
+        console.error("Error deleting user:", error.message);
+        res.status(500).json({ message: "Failed to delete user", error: error.message });
     }
 });
 

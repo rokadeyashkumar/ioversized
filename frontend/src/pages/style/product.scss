@@ -1,71 +1,146 @@
-.products-page {
-    padding: 20px;
-  
-    h1 {
-      text-align: center;
-      font-size: 2rem;
-      margin-bottom: 20px;
+.product-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 10px; /* Adjust padding as needed */
+
+  .product-type-menu {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+
+    margin-bottom: 20px;
+    margin-top: -850px;
+    width: 40%; /* Ensure full width */
+
+    .type-menu-item {
+      border: none;
+      
+      background: none;
+      color: #000000;
+      font-size: 14px;
+      margin: 0 -50px; /* Adjusted space between items */
+     
+      &.active {
+        color: #e60023; /* Highlight color for active item */
+        font-weight: bold; /* Optional: make the active item bold */
+      }
+
+      &:hover {
+        color: #555; /* Darker color for hover effect */
+      }
     }
-  
-    .products-container {
+  }
+
+  .product-list {
+    width: 100%; /* Ensure full width */
+    max-width: 1200px; /* Limit max width if needed */
+    
+   
+    
+    ul {
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-around;
-      gap: 20px;
-  
-      .product-card {
+      justify-content: space-between;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
         background: #fff;
-        border-radius: 12px;
+        border-radius: 14px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin: 10px;
         overflow: hidden;
-        width: 300px;
-        text-align: center;
-        transition: transform 0.3s ease-in-out;
-        
+        width: 280px;
+        text-align: left;
+        position: relative;
+        transition: transform 0.3s ease;
+
         img {
           width: 100%;
-          height: auto;
+          height: 300px;
           object-fit: cover;
         }
-  
+
         .product-info {
-          padding: 15px;
-  
-          h2 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-          }
-  
-          .original-price {
-            font-size: 1rem;
-            color: #999;
-            text-decoration: line-through;
+          padding: 10px;
+
+          h3 {
+            font-size: 12px;
             margin-bottom: 5px;
+            font-family: Arial, sans-serif;
+            font-weight: 400;
+            color: #000000;
           }
-  
-          .sale-price {
-            font-size: 1.25rem;
-            color: #e60023;
+
+          .price {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            .sale-price {
+              font-size: 12px;
+              color: #e60023;
+              font-weight: 600;
+            }
+
+            .original-price {
+              font-size: 12px;
+              color: #000000;
+              text-decoration: line-through;
+              font-weight: 400;
+            }
+          }
+
+          .color-list {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-top: 5px;
+
+            .color-circle {
+              width: 8px;
+              height: 8px;
+              border-radius: 50%;
+              margin: 1px;
+              border: 1px solid #ccc;
+              display: inline-block;
+            }
+
+            .additional-colors {
+              font-size: 12px;
+              color: #333;
+              margin-left: 5px;
+              font-weight: 400;
+            }
           }
         }
-  
+
         &:hover {
           transform: scale(1.01);
         }
       }
     }
-  
-    @media (max-width: 768px) {
-      .products-container {
-        flex-direction: column;
-        align-items: center;
-  
-        .product-card {
-          width: 100%;
-          max-width: 400px;
-          margin-bottom: 20px;
-        }
+  }
+
+  @media (max-width: 768px) {
+    .product-type-menu {
+      flex-direction: column;
+      align-items: center;
+
+      .type-menu-item {
+        margin: 5px 0;
+      }
+    }
+
+    .product-list ul {
+      flex-direction: column;
+      align-items: center;
+
+      li {
+        width: 90%;
       }
     }
   }
-  
+}

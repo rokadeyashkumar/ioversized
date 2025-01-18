@@ -6,17 +6,17 @@
   margin: 0 auto;
 
   .image-section {
-    flex: 2; // Allocate more space for the image
+    flex: 2;
     display: flex;
     align-items: flex-start;
     position: relative;
-    margin-right: 40px; // Adjust margin as needed
+    margin-right: 40px;
 
     .main-image {
       flex: 1;
       img {
         width: 100%;
-        max-width: 700px; // Increased size for the main image
+        max-width: 700px;
         height: auto;
         object-fit: cover;
         border-radius: 12px;
@@ -25,14 +25,14 @@
 
     .additional-images {
       position: absolute;
-      left: -120px; // Adjusted position to avoid overlap
+      left: -120px;
       top: 0;
       display: flex;
       flex-direction: column;
       gap: 8px;
 
       .additional-image {
-        width: 100px; // Size for additional images
+        width: 100px;
         height: auto;
         object-fit: cover;
         border-radius: 8px;
@@ -47,113 +47,188 @@
   }
 
   .info-section {
-    flex: 2; // Increased flex to make more space for text area
+    flex: 2;
     display: flex;
     flex-direction: column;
 
     h2 {
-      font-size: 1.8rem; // Font size for the product name
-      margin-bottom: 15px; // Increased margin
+      font-size: 1.8rem;
+      margin-bottom: 15px;
       color: #333;
     }
 
     p {
-      font-size: 1rem; // Increased font size for details
-      color: #333;
-      line-height: 1.6;
-      margin-bottom: 20px; // Increased margin
+      font-size: 1rem;
+      margin-bottom: 20px;
     }
 
     .attributes {
-      margin-bottom: 20px; // Increased margin
+      justify-content: space-between;
+      margin-bottom: 15px;
 
       .colors,
       .sizes {
-        margin-bottom: 20px;
+        flex: 1;
 
         h3 {
-          font-size: 1.4rem; // Increased font size for section headers
           margin-bottom: 10px;
-          color: #333;
         }
 
         .color-list {
           display: flex;
-          flex-wrap: wrap;
+          gap: 10px;
 
           .color-circle {
-            width: 35px; // Slightly increased size for color circles
-            height: 35px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
-            margin: 5px;
-            border: 2px solid #ccc;
-            display: inline-block;
-            cursor: pointer;
+            border: 1px solid #ccc;
           }
         }
 
         ul {
-          list-style-type: none;
-          padding: 0;
+          display: flex;
+          gap: 10px;
+          padding: 0; // Remove default padding
+          list-style: none; // Remove bullet points
 
           li {
-            font-size: 1rem; // Increased font size for sizes
-            margin: 5px 0;
+            background-color: #f4f4f4;
             padding: 5px 10px;
-            border: 1px solid #ddd;
             border-radius: 5px;
-            display: inline-block;
-            margin-right: 10px;
-            cursor: pointer;
           }
         }
       }
     }
 
     .price {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 20px; // Increased margin
+      margin: 20px 0;
+      font-size: 1.5rem;
 
       .original-price {
-        font-size: 1.3rem; // Increased font size for original price
-        color: #999;
         text-decoration: line-through;
-        margin-bottom: 5px;
+        margin-right: 10px;
       }
 
       .sale-price {
-        font-size: 1.6rem; // Increased font size for sale price
-        color: #e60023;
-        font-weight: bold;
+        color: #ff5722;
       }
     }
 
     .buttons {
       display: flex;
-      flex-direction: column; // Stack buttons vertically
-      gap: 15px; // Space between buttons
+      flex-direction: column;
+      gap: 20px;
 
       button {
-        padding: 15px 50px; // Increased button size
-        border: 2px solid #000; // Border color
-        border-radius: 5px;
-        background-color: transparent; // Remove button fill color
-        color: #000; // Text color
+        padding: 15px 30px;
+        font-size: 1.2rem;
+        border-radius: 8px;
         cursor: pointer;
-        font-size: 14px; // Increased font size for buttons
-        font-weight: 500;
-        transition: background-color 0.3s, color 0.3s; // Smooth transition effect
+        width: 100%;
 
-        &:hover {
-          background-color: #000; // Fill color on hover
-          color: #fff; // Text color on hover
+        &:first-of-type {
+          background-color: #000000;
+          border: 1px solid #ccc;
+          color: white;
+        }
+
+        &:last-of-type {
+          background-color: #000000;
+          color: white;
+          border: none;
         }
       }
     }
-
-    > div {
-      margin-top: 20px; // Increased margin for additional div
+    
+    .delivery-details {
+      margin: 20px 2px;
+      display: flex;
+      align-items: center;
+      gap: 10px; // Adjust spacing as needed
+    
+      .truck-icon {
+        font-size: 24px; // Adjust size as needed
+        color: #333; // Adjust color as needed
+      }
+    
+      p {
+        margin: 0;
+        font-size: 1rem; // Adjust size as needed
+        color: #333; // Adjust color as needed
+      }
     }
+    
+
+    hr {
+      margin: 30px 0;
+      border: none;
+      border-top: 1px solid #ddd;
+    }
+
+    .dropdown-section {
+      margin-bottom: 15px;
+    
+      .dropdown-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+    
+        h3 {
+          margin: 0;
+        }
+    
+        .arrow {
+          border: solid black;
+          border-width: 0 3px 3px 0;
+          display: inline-block;
+          padding: 3px;
+          margin-left: 10px; // Adjust spacing as needed
+        }
+    
+        .up {
+          transform: rotate(-135deg);
+          -webkit-transform: rotate(-135deg);
+        }
+    
+        .down {
+          transform: rotate(45deg);
+          -webkit-transform: rotate(45deg);
+        }
+      }
+    
+      .dropdown-content {
+        margin-top: 10px;
+        padding: 10px;
+        background-color: #f4f4f4;
+        border-radius: 5px;
+    
+        ul {
+          list-style-type: disc;
+          padding-left: 20px;
+    
+          li {
+            margin-bottom: 5px;
+          }
+        }
+    
+        table {
+          width: 100%;
+          border-collapse: collapse;
+    
+          th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+          }
+    
+          th {
+            background-color: #f4f4f4;
+          }
+        }
+      }
+    }
+    
   }
 }
